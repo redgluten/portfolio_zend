@@ -1,0 +1,15 @@
+{
+    "name": "root/project001",
+    "description": "Portfolio",
+    "require": {
+        "zendframework/zendframework1": "~1.12"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "gluten",
+            "email": "goulvenschaal@me.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
