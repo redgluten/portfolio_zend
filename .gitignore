@@ -2,3 +2,6 @@ vendor
 Vagrantfile
 .vagrant
 node_modules
+
+src/public/css
+src/public/

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <nav>
+        <home>
+            <label>Accueil</label>
+            <controller>index</controller>
+            <action>index</action>
+            <pages>
+                <error>
+                    <label>Erreur</label>
+                    <controller>error</controller>
+                    <action>error</action>
+                    <visible>0</visible>
+                </error>
+            </pages>
+        </home>
+        <user>
+            <label>Utilisateur</label>
+            <controller>user</controller>
+            <action>index</action>
+            <pages>
+                <list>
+                    <label>Liste utilisateur</label>
+                    <controller>user</controller>
+                    <action>list</action>
+                </list>
+                <create>
+                    <label>Création utilisateur</label>
+                    <controller>user</controller>
+                    <action>create</action>
+                </create>
+                <read>
+                    <label>Lecture utilisateur</label>
+                    <controller>user</controller>
+                    <action>read</action>
+                </read>
+                <update>
+                    <label>Modification utilisateur</label>
+                    <controller>user</controller>
+                    <action>update</action>
+                </update>
+                <delete>
+                    <label>Suppression utilisateur</label>
+                    <controller>user</controller>
+                    <action>delete</action>
+                </delete>
+            </pages>
+        </user>
+        <google>
+            <label>Ton meilleur ami</label>
+            <uri>http://google.fr/</uri>
+        </google>
+    </nav>
+</config>
