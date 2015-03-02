@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <?php echo $this->headTitle() . PHP_EOL; ?>
+    <?php echo $this->headMeta()->prependName('keywords', 'Portfolio') . PHP_EOL; ?>
+    <?php echo $this->headLink(array('rel' => 'icon', 'href' => '/favicon.ico')); ?>
+    <link rel="stylesheet" href="css/app.css">
+    
+</head>
+<body>
+
+    <?= $this->layout()->content; ?>
+    
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>

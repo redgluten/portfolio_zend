@@ -5,11 +5,11 @@ SetEnv APPLICATION_ENV development
 	Options +FollowSymlinks
 	RewriteEngine On
 	RewriteBase /
-	RewriteCond %{SCRIPT_FILENAME}% -d [OR]
-	RewriteCond %{SCRIPT_FILENAME}% -f
+	RewriteCond %{SCRIPT_FILENAME} -d [OR]
+	RewriteCond %{SCRIPT_FILENAME} -f
 	RewriteRule "(^|/)\." - [F]
-	RewriteCond %{REQUEST_FILENAME}% !-f
-	RewriteCond %{REQUEST_FILENAME}% !-d
-	RewriteCond %{REQUEST_FILENAME}% !-l
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-l
 	RewriteRule .* index.php [L]
 </IfModule>

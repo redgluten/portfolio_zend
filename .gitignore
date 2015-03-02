@@ -1,3 +1,4 @@
 vendor
 Vagrantfile
 .vagrant
+node_modules

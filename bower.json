@@ -1,0 +1,13 @@
+{
+  "name": "portfolio_zend",
+  "version": "0.1.0",
+  "description": "Portfolio Zend",
+  "authors": [
+    "gluten <contact@glutendesign.net>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.3"
+  }
+}
