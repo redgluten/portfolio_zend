@@ -20,17 +20,27 @@
         $container = new Zend_Navigation($config);
         $nav       = $this->navigation($container);
     ?>
-
-    <?php echo $nav->menu()->setPartial('partials/menu-bootstrap.phtml'); ?>
-
-
-    <!-- Breadcrumbs -->
-    <?php echo $nav->breadcrumbs()->setMinDepth(0)->setLinkLast(true); ?>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <?php echo $nav->menu()->setPartial('partials/menu-bootstrap.phtml'); ?>
+    </nav>
     
 
     <!-- Content -->
-    <?= $this->layout()->content; ?>
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <?php echo $nav->breadcrumbs()->setMinDepth(0)->setLinkLast(true)->setPartial('partials/breadcrumb-bootstrap.phtml'); ?>
+
+        <?= $this->layout()->content; ?>
+    </div>
     
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <nav>
+            <a href="sitemap">Plan du site</a>
+        </nav>
+    </footer>
 
     <!-- JavaScript -->
     <script type="text/javascript" src="js/app.js"></script>

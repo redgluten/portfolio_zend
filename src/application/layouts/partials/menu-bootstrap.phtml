@@ -3,13 +3,15 @@ $html = array();
 $html[] ='<ul class="nav navbar-nav">';
 
 foreach ($this->container as $page) {
+	  /* @var $page Zend_Navigation_Page */
+		
     $isActive = FALSE;
     $htmlSub = array();
 
     if (!$page->isVisible() || !$this->navigation()->menu()->accept($page)) {
         continue;
     }
-
+    
     $isActive = $page->isActive(true);
     if($dropdown = !empty($page->pages)){
         foreach ($page->pages as $subpage) {
@@ -43,6 +45,9 @@ foreach ($this->container as $page) {
         $html[] = '<li class="dropdown' . ($isActive ? ' active' : '') . '" >';
         $class = trim('dropdown-toggle ' . $class);
         $html[] = '<a href="' . $page->getHref() . '" class="'. $class .'" data-toggle="dropdown">';
+        if ($page->get('icon')) {
+        	$html[] = '<i class="fa fa-' . $page->get('icon') . '"></i>';
+        }
         $html[] = $page->getLabel();
         $html[] = '<b class="caret"></b>';
         $html[] = '</a>';
