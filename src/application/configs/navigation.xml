@@ -47,9 +47,5 @@
         </delete>
       </pages>
     </user>
-    <google>
-      <label>Ton meilleur ami</label>
-      <uri>http://google.fr</uri>
-    </google>
   </nav>
 </config>

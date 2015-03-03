@@ -2,6 +2,9 @@
 
 class SandboxController extends Zend_Controller_Action
 {
+
+    public $ajaxable = array('list' => array('html'));
+
     /**
      * Switch context to XML
      */
@@ -9,11 +12,17 @@ class SandboxController extends Zend_Controller_Action
     {
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
         $contextSwitch->addActionContext('index', array('xml', 'json'))
-                      ->initcontext();
+                      ->setAutoJsonSerialization(false)
+                      ->initContext();
+
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('list', 'html')
+                    ->initContext();
     }
 
     public function indexAction()
     {
         // code
     }
+
 }

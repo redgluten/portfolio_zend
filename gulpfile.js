@@ -136,7 +136,7 @@ gulp.task('uploads', function()
 
 // Views
 gulp.task('views', function() {
-    gulp.src('application/views/**/*.php')
+    gulp.src('src/application/views/**/*.phtml')
         .pipe(livereload());
 });
 
@@ -147,7 +147,7 @@ gulp.task('watch', function () {
     gulp.watch(assetsPath + 'sass/**/*.scss', ['styles']);
     gulp.watch(assetsPath + '/js/**.js', ['scripts']);
     gulp.watch(assetsPath + '/images/**', ['images']);
-    gulp.watch('application/views/**/*.php', ['views']);
+    gulp.watch('src/application/views/**/*.phtml', ['views']);
 });
 
 // The default task (called when you run `gulp` from cli)
