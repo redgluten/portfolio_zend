@@ -74,5 +74,66 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute('langRoute', $langRoute);
         $router->addRoute('defaultRoute', $defaultRoute);
     }
-}
 
+    /**
+     * Access Control List
+     */
+    public function _initAcl()
+    {
+        $acl = new Zend_Acl();
+
+
+        // Roles
+        // =====
+        $acl->addRole('guest');
+        $acl->addRole('other', 'guest');
+        $acl->addRole('root', 'other');
+
+
+        // Resources
+        // =========
+
+        // Group CRUD
+        $acl->addResource('CRUD');
+        $acl->addResource('skill', 'CRUD');
+        $acl->addResource('progress', 'CRUD');
+        $acl->addResource('user', 'CRUD');
+
+        $acl->addResource('auth');
+
+
+        // Rules
+        // =====
+
+        // Allow guest to login
+        $acl->allow('guest', 'auth', 'login');
+
+        // Deny connected user to login
+        $acl->deny('other', 'auth', 'login');
+
+        // Allow connected user to logout
+        $acl->allow('other', 'auth', 'logout');
+
+        // Allow guest to create new user
+        $acl->allow('guest', 'user', 'create');
+
+        // Guest has read write on CRUD resources
+        $acl->allow('guest', 'CRUD', 'read');
+
+        // Allow connected user to create resources
+        $acl->allow('other', 'CRUD', 'create');
+
+        // Deny connected user to create user
+        $acl->deny('other', 'user', 'create');
+
+        // Allow connected user to update and delete its own resources
+        $acl->allow('other', 'CRUD', ['update', 'delete'], new Portfolio_Acl_Assert_Owner());
+
+        // Allow root to update and delete all resources
+        $acl->allow('root', 'CRUD', ['create', 'update', 'delete']);
+
+
+
+        Zend_Registry::set('Zend_Acl', $acl);
+    }
+}

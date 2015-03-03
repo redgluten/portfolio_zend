@@ -77,8 +77,8 @@ gulp.task('styles', function() {
 
 // JavaScript
 gulp.task('scripts', function() {
-    var jQuery      = [bowerPath + 'jquery/dist/jquery.min.js'];
-    var bootstrapJs = [bowerPath + 'javascripts/bootstrap.js'];
+    var jQuery      = [bowerPath + 'jquery/dist/jquery.js'];
+    var bootstrapJs = [bowerPath + 'bootstrap-sass-official/assets/javascripts/bootstrap.js'];
     var customJs    = [assetsPath + '/js/*.js'];
 
     // Hints on custom js

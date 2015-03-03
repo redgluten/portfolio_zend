@@ -10,6 +10,7 @@ class AuthController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        // forward to another method
         $this->forward("login");
     }
 
@@ -28,9 +29,12 @@ class AuthController extends Zend_Controller_Action
             // Validates form inputs
             if ($form->isValid($data)) {
 
+                // Get filtered inputs
                 $login    = $form->getValue('username');
                 $password = $form->getValue('password');
 
+
+                // DB auth adapter configuration
                 $adapter = new Zend_Auth_Adapter_DbTable();
                 $adapter->setTableName(Model_DbTable_User::TABLE_NAME)
                         ->setIdentityColumn(Model_DbTable_User::COL_LOGIN)
@@ -38,12 +42,14 @@ class AuthController extends Zend_Controller_Action
                         ->setIdentity($login)
                         ->setCredential($password);
 
+                // User authentification via Zend_Auth
                 $auth       = Zend_Auth::getInstance();
                 $authResult = $auth->authenticate($adapter);
 
+                // Rewrite storage to Model_User format
                 if ($authResult->isValid()) {
-                    $storage = $auth->getStorage();
 
+                    $storage  = $auth->getStorage();
                     $sdtClass = $adapter->getResultRowObject(null, Model_DbTable_User::COL_PASSWORD);
 
                     $user = new Model_User();
@@ -53,10 +59,12 @@ class AuthController extends Zend_Controller_Action
                     $storage->write($user);
                 }
 
+                // Return code handling
                 if ($authResult->getCode() == Zend_Auth_Result::SUCCESS) {
+                    $this->view->priorityMessenger('Authentification réussie', 'success');
                     $this->redirect($this->view->url([], 'indexIndex'));
                 } else {
-                    throw new Zend_Exception($authResult->getCode());
+                    throw new Zend_Exception($authResult->getMessages(), $authResult->getCode());
                     
                 }
             }
@@ -67,11 +75,12 @@ class AuthController extends Zend_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
 
-        // Clear identity if existant
+        // Clear identity if exists
         if ($auth->hasIdentity()) {
-            $auth->clearIndentity();
+            $auth->clearIdentity();
         }
 
+        $this->view->priorityMessenger('Déconnexion réussie', 'success');
         $this->redirect($this->view->url(array(), 'indexIndex'));
     }
 

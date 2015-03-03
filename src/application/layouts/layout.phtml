@@ -19,6 +19,13 @@
         $config    = new Zend_Config_Xml(APPLICATION_PATH . "/configs/navigation.xml", "nav");
         $container = new Zend_Navigation($config);
         $nav       = $this->navigation($container);
+        $nav->setAcl(Zend_Registry::get('Zend_Acl'));
+        $nav->setDefaultrole('guest');
+
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $nav->setRole(Zend_auth::getInstance()->getIdentity());
+        }
+
     ?>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <?php echo $nav->menu()->setPartial('partials/menu-bootstrap.phtml'); ?>
@@ -30,6 +37,9 @@
 
         <!-- Breadcrumbs -->
         <?php echo $nav->breadcrumbs()->setMinDepth(0)->setLinkLast(true)->setPartial('partials/breadcrumb-bootstrap.phtml'); ?>
+
+        <!-- Message -->
+        <?php echo $this->partial("partials/priorityMessages.phtml", ['priorityMessages' => $this->priorityMessenger()]) ?>
 
         <?= $this->layout()->content; ?>
     </div>

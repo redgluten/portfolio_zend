@@ -1,6 +1,6 @@
 <?php
 
-class Model_User
+class Model_User implements Zend_Acl_Role_Interface, Zend_Acl_Resource_Interface
 {
 
     /**
@@ -92,5 +92,31 @@ class Model_User
         $this->login = $login;
 
         return $this;
+    }
+
+    /**
+     * Returns the string idenitifer of the resource
+     * 
+     * @return string
+     */
+    public function getResourceId()
+    {
+      return 'user';
+    }
+
+    /**
+     * Returns the string identifier of the role
+     * 
+     * @return string
+     */
+    public function getRoleId()
+    {
+        if ($this->getId() === null) {
+            return 'guest';
+        } elseif ($this->getId() === 1) {
+            return 'root';
+        }
+
+        return 'other';
     }
 }

@@ -3,6 +3,7 @@
   <nav>
     <home>
       <label>Accueil</label>
+      <route>indexIndex</route>
       <controller>index</controller>
       <action>index</action>
       <pages>
@@ -23,29 +24,50 @@
           <label>Liste utilisateur</label>
           <controller>user</controller>
           <action>list</action>
+          <resource>user</resource>
+          <privilege>list</privilege>
         </list>
-        
         <create>
           <label>Création utilisateur</label>
           <controller>user</controller>
           <action>create</action>
+          <resource>user</resource>
+          <privilege>create</privilege>
         </create>
         <read>
           <label>Lecture utilisateur</label>
           <controller>user</controller>
           <action>read</action>
+          <resource>user</resource>
+          <privilege>read</privilege>
         </read>
         <update>
           <label>Modification utilisateur</label>
           <controller>user</controller>
           <action>update</action>
+          <resource>user</resource>
+          <privilege>update</privilege>
         </update>
         <delete>
           <label>Suppression utilisateur</label>
           <controller>user</controller>
           <action>delete</action>
+          <resource>user</resource>
+          <privilege>delete</privilege>
         </delete>
       </pages>
     </user>
+    <authLogin>
+      <label>Sign In</label>
+      <route>authLogin</route>
+      <resource>auth</resource>
+      <privilege>login</privilege>
+    </authLogin>
+    <authLogout>
+      <label>Sign out</label>
+      <route>authLogout</route>
+      <resource>auth</resource>
+      <privilege>logout</privilege>
+    </authLogout>
   </nav>
 </config>
