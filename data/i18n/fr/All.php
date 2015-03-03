@@ -8,5 +8,6 @@ return array(
         'Voitures'
     ),
     'Voitures' => '',
-    'Nous sommes le : %s' => 'Nous sommes le : %s'
+    'Nous sommes le : %s' => 'Nous sommes le : %s',
+    'Vos compétences' => 'Vos compétences',
 );

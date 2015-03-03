@@ -14,7 +14,8 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-0": {
-            "ZendX": "library/"
+            "ZendX": "src/library/",
+            "Portfolio_": "src/library"
         }
     }
 }

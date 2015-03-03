@@ -8,5 +8,6 @@ return array(
         'Cars'
     ),
     'Voitures' => '',
-    'Nous sommes le : %s' => 'Today’s date: %s'
+    'Nous sommes le : %s' => 'Today’s date: %s',
+    'Vos compétences' => 'Your skills'
 );
