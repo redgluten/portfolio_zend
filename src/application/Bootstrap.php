@@ -102,6 +102,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl->addResource('auth');
         $acl->addResource('index');
         $acl->addResource('contact');
+        $acl->addResource('sitemap');
 
 
         // Rules
@@ -113,6 +114,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Allow guest to see index & contact
         $acl->allow('guest', 'index', 'index');
         $acl->allow('guest', 'contact', 'index');
+        $acl->allow('guest', 'sitemap', 'index');
 
         // Deny connected user to login
         $acl->deny('other', 'auth', 'login');
@@ -123,8 +125,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Allow guest to create new user
         $acl->allow('guest', 'user', 'create');
 
-        // Guest has read write on CRUD resources
-        $acl->allow('guest', 'CRUD', 'read');
+        // Guest has read and list on CRUD resources
+        $acl->allow('guest', 'CRUD', ['read', 'list']);
 
         // Allow connected user to create resources
         $acl->allow('other', 'CRUD', 'create');

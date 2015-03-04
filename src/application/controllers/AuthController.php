@@ -23,7 +23,7 @@ class AuthController extends Zend_Controller_Action
         // Captcha
         if (isset($session->count) and $session->count > 3) {
             $form->addElement('captcha', 'captcha', [
-                'label' => 'Plaease enter the 5 letters displayed below',
+                'label' => 'Please enter the 5 letters displayed below',
                 'required' => true,
                 'captcha' => [
                     'captcha'        => 'Image',

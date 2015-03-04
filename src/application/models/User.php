@@ -23,16 +23,19 @@ class Model_User implements Zend_Acl_Role_Interface, Zend_Acl_Resource_Interface
      * @var string
      */
     private $password;
-   
-    
-    public function toArray()
-    {
-        return array(
-            'id'       => $this->getId(),
-            'login'    => $this->getLogin(),
-            'password' => $this->getPassword()
-        );
-    }
+
+
+    /**
+     * Email
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $created;
+
     
     /**
     * @param integer $id
@@ -118,5 +121,71 @@ class Model_User implements Zend_Acl_Role_Interface, Zend_Acl_Resource_Interface
         }
 
         return 'other';
+    }
+
+    /**
+     * Gets the Email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the Email.
+     *
+     * @param string $email the email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function toArray()
+    {
+        return array(
+            'id'       => $this->getId(),
+            'login'    => $this->getLogin(),
+            'email'    => $this->getEmail(),
+            'password' => $this->getPassword(),
+            'created'  => $this->getCreated(),
+        );
+    }
+
+    /**
+     * Gets the creation date.
+     *
+     * @return string
+     */
+    public function getCreated()
+    {
+        return new Zend_Date($this->created);
+    }
+
+    /**
+     * Sets the creation date.
+     *
+     * @param string $created the created
+     *
+     * @return self
+     */
+    public function setCreated($created = null)
+    {
+
+        if ($created === null) {
+            $created = Zend_Date::now();
+        } else {
+            $created = new Zend_Date($created);
+        }
+
+        $this->created = $created;
+
+        return $this;
     }
 }

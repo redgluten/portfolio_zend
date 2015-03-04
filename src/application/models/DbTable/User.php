@@ -6,6 +6,7 @@ class Model_DbTable_User extends Zend_Db_Table_Abstract
     CONST COL_LOGIN     = 'login';
     CONST COL_PASSWORD  = 'password';
     CONST COL_EMAIL     = 'email';
+    CONST COL_CREATED   = 'created';
     
     protected $_name    = self::TABLE_NAME;
     protected $_primary = self::COL_ID;

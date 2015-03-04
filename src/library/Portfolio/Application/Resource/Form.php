@@ -1,9 +1,14 @@
 <?php 
 
-class Portfolio_Application_Resource_Form extends Zend_Application_ResourceAbstract
+
+/**
+ * Resource Form
+ * Allows element configuration from config file at app startup
+ */
+class Portfolio_Application_Resource_Form extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {
-        $this->getBootsrap()->bootstrap('FrontController');
+        Portfolio_Form::$prefixPaths = $this->getOptions()['addPrefixPath'];
     }
 }

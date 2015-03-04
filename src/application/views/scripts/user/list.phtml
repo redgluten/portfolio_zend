@@ -1,0 +1,20 @@
+<h2>Liste Utilisateurs</h2>
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php echo $this->partialLoop("user/partials/item-table-striped.phtml", 'default', $this->users); ?>
+    </tbody>
+
+
+</table>

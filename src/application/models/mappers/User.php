@@ -60,7 +60,7 @@ class Model_Mapper_User
     {
         $data  = $this->objectToRow($user);
         $where = array(
-            Model_DbTable_User::COL_ID . ' = ?' => $user->getUserId()
+            Model_DbTable_User::COL_ID . ' = ?' => $user->getId()
         );
         return $this->getUserTable()->update($data, $where);
     }
@@ -85,9 +85,11 @@ class Model_Mapper_User
     private function rowToObject($data)
     {
         $user = new Model_User();
-        $user->setUserId($data[Model_DbTable_User::COL_ID])
-            ->setUserLogin($data[Model_DbTable_User::COL_LOGIN])
-            ->setUserPassword($data[Model_DbTable_User::COL_PASSWORD]);
+        $user->setId($data[Model_DbTable_User::COL_ID])
+            ->setLogin($data[Model_DbTable_User::COL_LOGIN])
+            ->setEmail($data[Model_DbTable_User::COL_EMAIL])
+            ->setPassword($data[Model_DbTable_User::COL_PASSWORD])
+            ->setCreated();
         return $user;
     }
 
@@ -99,9 +101,11 @@ class Model_Mapper_User
     private function objectToRow(Model_User $user)
     {
         return array(
-            Model_DbTable_User::COL_ID => $user->getUserId(),
-            Model_DbTable_User::COL_LOGIN => $user->getUserLogin(),
-            Model_DbTable_User::COL_PASSWORD => $user->getUserPassword()
+            Model_DbTable_User::COL_ID       => $user->getId(),
+            Model_DbTable_User::COL_LOGIN    => $user->getLogin(),
+            Model_DbTable_User::COL_EMAIL    => $user->getEmail(),
+            Model_DbTable_User::COL_PASSWORD => $user->getPassword(),
+            Model_DbTable_User::COL_CREATED  => $user->getCreated()->toString(Zend_Date::DATETIME)
         );
     }
 }
