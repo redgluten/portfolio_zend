@@ -35,6 +35,13 @@ class ErrorController extends Zend_Controller_Action
                             case Zend_Auth_Result::FAILURE:
                             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
                                 $message = "Echec d'authentification";
+                                $session = new Zend_Session_Namespace('FAILURE_CREDENTIAL');
+
+                                if (! isset($session->count) ) {
+                                    $session->count = 0;
+                                }
+                                $session->count++;
+
                                 break;
 
                             case Zend_Auth_Result::FAILURE_CREDENTIAL_AMBIGUOUS:
@@ -46,6 +53,8 @@ class ErrorController extends Zend_Controller_Action
                                 $message = "Identifiant inconnu";
                                 break;
                         }
+
+                        $this->view->priorityMessenger($message, 'error');
 
                         break;
 
@@ -91,7 +100,4 @@ class ErrorController extends Zend_Controller_Action
         $log = $bootstrap->getResource('Log');
         return $log;
     }
-
-
 }
-

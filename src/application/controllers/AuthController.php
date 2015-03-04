@@ -18,6 +18,30 @@ class AuthController extends Zend_Controller_Action
     {
         $form = new Form_Login();
 
+        $session = new Zend_Session_Namespace('FAILURE_CREDENTIAL');
+
+        // Captcha
+        if (isset($session->count) and $session->count > 3) {
+            $form->addElement('captcha', 'captcha', [
+                'label' => 'Plaease enter the 5 letters displayed below',
+                'required' => true,
+                'captcha' => [
+                    'captcha'        => 'Image',
+                    'wordLen'        => 8,
+                    'timeout'        => 300,
+                    'height'         => 100,
+                    'width'          => 300,
+                    'fontSize'       => 22,
+                    'imgDir'         => SRC_PATH . '/public/img/captcha',
+                    'imgUrl'         => '/img/captcha',
+                    'font'           => SRC_PATH . '/public/fonts/Consolas.ttf',
+                    'timeout'        => 500,
+                    'dotNoiseLevel'  => 0,
+                    'linenoiseLevel' => 0
+                ]
+            ]);
+        }
+
         $this->view->form = $form;
 
         // check presence of post request
@@ -57,6 +81,7 @@ class AuthController extends Zend_Controller_Action
                          ->setLogin($sdtClass->{Model_DbTable_User::COL_LOGIN});
 
                     $storage->write($user);
+                    Zend_Session::namespaceUnset('FAILURE_CREDENTIAL');
                 }
 
                 // Return code handling
@@ -64,7 +89,7 @@ class AuthController extends Zend_Controller_Action
                     $this->view->priorityMessenger('Authentification réussie', 'success');
                     $this->redirect($this->view->url([], 'indexIndex'));
                 } else {
-                    throw new Zend_Exception($authResult->getMessages(), $authResult->getCode());
+                    throw new Zend_Auth_Exception($authResult->getCode());
                     
                 }
             }

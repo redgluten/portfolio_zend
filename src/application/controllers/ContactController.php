@@ -8,11 +8,10 @@ class ContactController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
-    public function getForm()
+    public function indexAction()
     {
-        // action body
+        $form = new Form_Contact();
+
+        $this->view->form = $form;
     }
-
-
 }
-
