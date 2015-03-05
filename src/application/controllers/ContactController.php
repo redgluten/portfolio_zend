@@ -6,7 +6,7 @@ class ContactController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
-    }
+    }http://www.croes.org/gerald/blog/qu-est-ce-que-rest/447/
 
     public function indexAction()
     {
@@ -25,6 +25,7 @@ class ContactController extends Zend_Controller_Action
                 $mail = new Zend_Mail();
 
                 $mail->setSubject('Demande de contact');
+                $mail->addTo('goulvenschaal@me.com');
 
                 $view = new Zend_View();
                 $view->name    = $form->getValue('name');

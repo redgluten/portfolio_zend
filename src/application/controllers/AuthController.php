@@ -3,9 +3,21 @@
 class AuthController extends Zend_Controller_Action
 {
 
+    /**
+     * @var array
+     */
+    protected $oauth_config;
+
     public function init()
     {
-        /* Initialize action controller here */
+        if ($this->getRequest()->getActionName() === 'linkedin' ) {
+            $this->oauth_config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/linkedin.ini', APPLICATION_ENV, true);
+            $this->config->requestScheme = Zend_Oauth::REQUEST_SCHEME_HEADER;
+
+        }
+        if ($this->getRequest()->getActionName() === 'viadeo' ) {
+            $this->oauth_config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/viadeo.ini', APPLICATION_ENV, true);
+        }
     }
 
     public function indexAction()
@@ -108,5 +120,25 @@ class AuthController extends Zend_Controller_Action
         $this->view->priorityMessenger('Déconnexion réussie', 'success');
         $this->redirect($this->view->url(array(), 'indexIndex'));
     }
-}
 
+    /**
+     * Authenticate user with Linkedin Oauth
+     */
+    public function linkedinAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $session = new Zend_Session_Namespace('Linkedin');
+
+        // OAuth tool creation
+        $consumer = new Zend_Oauth_Consumer($this->oauth_config);
+
+        // fetch a request token
+        $token  = $consumer->getRequestToken(['scope' => 'r_fullprofile']);
+
+        // persist the token to a storage
+        $session->token = $token;
+
+        // Redirect the user
+        $consumer->redirect();
+    }
+}

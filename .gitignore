@@ -6,3 +6,9 @@ node_modules
 src/public/css
 src/public/
 public/apc.php
+
+data/db
+data/logs
+data/cache
+
+src/application/configs/mail.ini

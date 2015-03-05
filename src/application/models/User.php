@@ -36,6 +36,17 @@ class Model_User implements Zend_Acl_Role_Interface, Zend_Acl_Resource_Interface
      */
     private $created;
 
+    /**
+     * Linkedin Id
+     * @var string
+     */
+    private $linkedinId;
+
+    /**
+     * Viadeo Id
+     * @var string
+     */
+    private $viadeoId;
     
     /**
     * @param integer $id
@@ -185,6 +196,54 @@ class Model_User implements Zend_Acl_Role_Interface, Zend_Acl_Resource_Interface
         }
 
         $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Gets the Linkedin Id.
+     *
+     * @return string
+     */
+    public function getLinkedinId()
+    {
+        return $this->linkedinId;
+    }
+
+    /**
+     * Sets the Linkedin Id.
+     *
+     * @param string $linkedinId the linkedin id
+     *
+     * @return self
+     */
+    public function setLinkedinId($linkedinId)
+    {
+        $this->linkedinId = $linkedinId;
+
+        return $this;
+    }
+
+    /**
+     * Gets the Viadeo Id.
+     *
+     * @return string
+     */
+    public function getViadeoId()
+    {
+        return $this->viadeoId;
+    }
+
+    /**
+     * Sets the Viadeo Id.
+     *
+     * @param string $viadeoId the viadeo id
+     *
+     * @return self
+     */
+    public function setViadeoId($viadeoId)
+    {
+        $this->viadeoId = $viadeoId;
 
         return $this;
     }

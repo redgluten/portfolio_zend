@@ -3,8 +3,8 @@ CREATE TABLE `user` (
     `login` VARCHAR(256) NOT NULL,
     `password` VARCHAR(256) NOT NULL,
     `email` VARCHAR(256) NOT NULL,
-    `linkedinId` VARCHAR(256) NULL,
-    `viadeoId` VARCHAR(256) NULL,
+    `linkedin_id` VARCHAR(256) NULL,
+    `viadeo_id` VARCHAR(256) NULL,
     `created` DATETIME NOT NULL
 );
  

@@ -13,3 +13,7 @@
 - [Bower](http://bower.io/)
 - [Gulp](http://gulpjs.com/)
 
+
+## Notes
+
+- [REST](http://www.croes.org/gerald/blog/qu-est-ce-que-rest/447/)

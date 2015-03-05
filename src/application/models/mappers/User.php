@@ -86,6 +86,8 @@ class Model_Mapper_User
     {
         $user = new Model_User();
         $user->setId($data[Model_DbTable_User::COL_ID])
+            ->setLinkedinID($data[Model_DbTable_User::COL_LINKEDIN_ID])
+            ->setViadeoId($data[Model_DbTable_User::COL_VIADEO_ID])
             ->setLogin($data[Model_DbTable_User::COL_LOGIN])
             ->setEmail($data[Model_DbTable_User::COL_EMAIL])
             ->setPassword($data[Model_DbTable_User::COL_PASSWORD])
@@ -101,11 +103,13 @@ class Model_Mapper_User
     private function objectToRow(Model_User $user)
     {
         return array(
-            Model_DbTable_User::COL_ID       => $user->getId(),
-            Model_DbTable_User::COL_LOGIN    => $user->getLogin(),
-            Model_DbTable_User::COL_EMAIL    => $user->getEmail(),
-            Model_DbTable_User::COL_PASSWORD => $user->getPassword(),
-            Model_DbTable_User::COL_CREATED  => $user->getCreated()->toString(Zend_Date::DATETIME)
+            Model_DbTable_User::COL_ID          => $user->getId(),
+            Model_DbTable_User::COL_LINKEDIN_ID => $user->getLinkedinId(),
+            Model_DbTable_User::COL_VIADEO_ID   => $user->getViadeoId(),
+            Model_DbTable_User::COL_LOGIN       => $user->getLogin(),
+            Model_DbTable_User::COL_EMAIL       => $user->getEmail(),
+            Model_DbTable_User::COL_PASSWORD    => $user->getPassword(),
+            Model_DbTable_User::COL_CREATED     => $user->getCreated()->toString(Zend_Date::DATETIME)
         );
     }
 }

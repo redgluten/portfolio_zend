@@ -103,7 +103,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl->addResource('index');
         $acl->addResource('contact');
         $acl->addResource('sitemap');
-
+        $acl->addResource('linkedin');
+        $acl->addResource('viadeo');
 
         // Rules
         // =====
@@ -113,7 +114,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // Allow guest to see index & contact
         $acl->allow('guest', 'index', 'index');
+        $acl->allow('guest', 'linkedin', 'index');
+        $acl->allow('guest', 'linkedin', 'callback');        
+        $acl->allow('guest', 'viadeo', 'index');
+        $acl->allow('guest', 'viadeo', 'callback');
         $acl->allow('guest', 'contact', 'index');
+        $acl->allow('guest', 'auth', 'linkedin');
+        $acl->allow('guest', 'auth', 'callback');
         $acl->allow('guest', 'sitemap', 'index');
 
         // Deny connected user to login
@@ -135,7 +142,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl->deny('other', 'user', 'create');
 
         // Allow connected user to update and delete its own resources
-        $acl->allow('other', 'CRUD', ['update', 'delete'], new Portfolio_Acl_Assert_Owner());
+        $acl->allow('other', 'CRUD', ['update', 'delete'], new Assert_Owner());
 
         // Allow root to update and delete all resources
         $acl->allow('root', 'CRUD', ['create', 'update', 'delete']);
