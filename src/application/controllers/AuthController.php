@@ -23,7 +23,7 @@ class AuthController extends Zend_Controller_Action
         // Captcha
         if (isset($session->count) and $session->count > 3) {
             $form->addElement('captcha', 'captcha', [
-                'label' => 'Please enter the 5 letters displayed below',
+                'label' => "Bonjour humain, merci de prouver que tu l'es",
                 'required' => true,
                 'captcha' => [
                     'captcha'        => 'Image',
@@ -107,11 +107,6 @@ class AuthController extends Zend_Controller_Action
 
         $this->view->priorityMessenger('Déconnexion réussie', 'success');
         $this->redirect($this->view->url(array(), 'indexIndex'));
-    }
-
-    public function stepTwo()
-    {
-        // code
     }
 }
 

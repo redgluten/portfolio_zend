@@ -3,6 +3,8 @@ CREATE TABLE `user` (
     `login` VARCHAR(256) NOT NULL,
     `password` VARCHAR(256) NOT NULL,
     `email` VARCHAR(256) NOT NULL,
+    `linkedinId` VARCHAR(256) NULL,
+    `viadeoId` VARCHAR(256) NULL,
     `created` DATETIME NOT NULL
 );
  
@@ -19,7 +21,7 @@ CREATE TABLE `skill` (
 
 CREATE INDEX "pk_skill_id" ON "skill" ("id");
 
-CREATE TABLE `career` (
+CREATE TABLE `progress` (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `label` VARCHAR(256) NOT NULL,
     `start_date` DATETIME NOT NULL,
@@ -27,10 +29,10 @@ CREATE TABLE `career` (
     `type` INTEGER NOT NULL,
     `now` INTEGER,
     `description` TEXT,
-    `place` INTEGER
+    `place` VARCHAR(256) NOT NULL
 );
 
-CREATE INDEX "pk_career_id" ON "career" ("id");
+CREATE INDEX "pk_progress_id" ON "progress" ("id");
 
 CREATE TABLE `work` (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -38,10 +40,23 @@ CREATE TABLE `work` (
     `client` VARCHAR(256),
     `url` TEXT NOT NULL,
     `type` INTEGER NOT NULL,
-    `upload` TEXT,
+    `upload_dir` TEXT,
     `release_date` DATETIME NOT NULL,
-    `description` TEXT,
-    `technologie` TEXT
+    `description` TEXT
 );
 
 CREATE INDEX "pk_work_id" ON "work" ("id");
+
+CREATE TABLE `technologie` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  `label` VARCHAR(256) NOT NULL
+);
+
+CREATE INDEX "pk_technologie_id" ON "technologie" ("id");
+
+CREATE TABLE `work_technologie` (
+  `work_id` INTEGER NOT NULL,
+  `technologie_id` INTEGER NOT NULL
+);
+
+CREATE UNIQUE INDEX "pk_work_technologie_id" ON "work_technologie" ("work_id", "technologie_id");

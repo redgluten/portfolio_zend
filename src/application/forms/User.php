@@ -50,4 +50,19 @@ class Form_User extends Portfolio_Form
             'label' => 'Créer votre compte',
         ]);
     }
+
+    /**
+     * Populate form from Model
+     * @param  Model_User $user 
+     */
+    public function populate(Model_User $user)
+    {
+        $values = [
+            'username' => $user->getLogin(),
+            'email'    => $user->getEmail(),
+            'password' => $user->getPassword(),
+        ];
+
+        parent::populate($values);
+    }
 }

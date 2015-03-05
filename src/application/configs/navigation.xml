@@ -42,7 +42,12 @@
           <privilege>read</privilege>
         </read>
         <update>
-          <label>Modification utilisateur</label>
+          <label>:Service_User</label>
+          <params>
+            <id>:id</id>
+          </params>
+          <route>userUpdate</route>
+          <type>Portfolio_Navigation_Page_Dynamic</type>
           <controller>user</controller>
           <action>update</action>
           <resource>user</resource>
