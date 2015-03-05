@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "30bd7c436e612b9771e59dced0fcbde3",
+    "hash": "14831af2c6d9d223e29b0e04648b2370",
     "packages": [
         {
             "name": "zendframework/zendframework1",
@@ -54,10 +54,40 @@
             "time": "2015-02-11 15:08:45"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "spekkionu/zfdebug",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spekkionu/ZFDebug.git",
+                "reference": "4c67cc3aebf723c9f7177f6ab08c1b2349ccb273"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spekkionu/ZFDebug/zipball/4c67cc3aebf723c9f7177f6ab08c1b2349ccb273",
+                "reference": "4c67cc3aebf723c9f7177f6ab08c1b2349ccb273",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "library/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Debug bar for Zend Framework 1",
+            "time": "2015-02-05 00:44:50"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "spekkionu/zfdebug": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

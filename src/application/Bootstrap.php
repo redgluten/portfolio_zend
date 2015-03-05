@@ -142,7 +142,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl->deny('other', 'user', 'create');
 
         // Allow connected user to update and delete its own resources
-        $acl->allow('other', 'CRUD', ['update', 'delete'], new Assert_Owner());
+        $acl->allow('other', 'CRUD', ['update', 'delete'], new Portfolio_Acl_Assert_Owner());
 
         // Allow root to update and delete all resources
         $acl->allow('root', 'CRUD', ['create', 'update', 'delete']);
@@ -150,5 +150,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
         Zend_Registry::set('Zend_Acl', $acl);
+    }
+
+    protected function _initZFDebug()
+    {
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->registerNamespace('ZFDebug');
+        
+        $this->bootstrap('frontController');
+        $frontController = $this->getResource('frontController');
+    
+        $this->bootstrap('multidb');
+        
+        $db = $this->getResource('multidb');
+        var_dump($db);exit;
+        
+        $options = array(
+            'plugins' => array('Variables',
+                'Database' => array('adapter' => $db),
+                //'File' => array('basePath' => '/path/to/project'),
+                //'Cache' => array('backend' => $cache->getBackend()),
+            'Exception')
+        );
+        $debug = new ZFDebug_Controller_Plugin_Debug($options);
+    
+        $frontController->registerPlugin($debug);
     }
 }

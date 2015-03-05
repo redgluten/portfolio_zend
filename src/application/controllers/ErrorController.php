@@ -23,6 +23,7 @@ class ErrorController extends Zend_Controller_Action
             default:
 
                 switch (true) {
+
                     case $errors->exception instanceof Zend_Auth_Exception:
                         // Auth error
                         $this->getResponse()->setHttpResponseCode(500);
@@ -43,21 +44,20 @@ class ErrorController extends Zend_Controller_Action
 
                             case Zend_Auth_Result::FAILURE_CREDENTIAL_AMBIGUOUS:
                             case Zend_Auth_Result::FAILURE_UNCATEGORIZED:
-                                $message = "Echec d'authentification";
+                                $message  = "Echec d'authentification";
+                                $priority = Zend_Log::CRIT;
                                 break;
 
                             case Zend_Auth_Result::FAILURE_IDENTITIY_NOT_FOUND:
                                 $message = "Identifiant inconnu";
                                 break;
                         }
-
-                        $this->view->priorityMessenger($message, 'error');
-
                         break;
 
 
                     case $errors->exception instanceof Zend_DB_Exception:
                         // DB error
+                        $priority = Zend_Log::CRIT;
                         $this->getResponse()->setHttpResponseCode(500);
                         $this->view->message = 'Database error';
                         break;
@@ -69,9 +69,7 @@ class ErrorController extends Zend_Controller_Action
                         $this->view->message = 'Application error';
                         break;
                 }
-
-
-                break;
+            break;
         }
         
         // Log exception, if logger available
@@ -81,9 +79,9 @@ class ErrorController extends Zend_Controller_Action
         }
         
         // conditionally display exceptions
-        //if ($this->getInvokeArg('displayExceptions') == true) {
+        if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
-        //}
+        }
         
         $this->view->request   = $errors->request;
     }
@@ -91,7 +89,7 @@ class ErrorController extends Zend_Controller_Action
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasResource('Log')) {
+        if (! $bootstrap->hasResource('Log') ) {
             return false;
         }
         $log = $bootstrap->getResource('Log');
